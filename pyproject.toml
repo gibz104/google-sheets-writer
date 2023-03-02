@@ -1,0 +1,39 @@
+# Project metadata
+[tool.poetry]
+name = "google-sheets-writer"
+version = "0.1"
+description = "google-sheets-writer"
+authors = ["gibz104"]
+
+# Python dependencies
+[tool.poetry.dependencies]
+python = "^3.9"
+
+coverage = "^7.2.1"
+gspread = "^5.6.0"
+pandas = "^1.5.3"
+
+pytest = "^7.2.1"
+pytest-benchmark = "^4.0.0"
+pytest-sugar = "^0.9.6"
+pytest-icdiff = "^0.6"
+tox = "^4.4.6"
+
+# Build configuration
+[build-system]
+requires = ["poetry-core>=1.0.0"]
+build-backend = "poetry.core.masonry.api"
+
+# Tox setup
+[tool.tox]
+legacy_tox_ini = """
+[tox]
+skipsdist = true
+envlist = py37,py38,py39,py310
+
+[testenv]
+whitelist_externals = poetry
+commands =
+    poetry install -v
+    poetry run pytest
+"""
