@@ -39,8 +39,6 @@ class GoogleSheetsWriter:
             return gspread.oauth()
         elif self.auth_type == 'service_account':
             return gspread.service_account()
-        else:
-            raise ValueError('Invalid auth_type')
 
     def get_last_cell(
         self,
@@ -76,22 +74,16 @@ class GoogleSheetsWriter:
         wb.add_worksheet(worksheet_name, rows=num_rows, cols=num_cols)
         logging.info(f'Created "{worksheet_name}" worksheet in "{workbook_name}" workbook.')
 
-    def delete_workbook(self, workbook_name: str):
+    def delete_object(self, workbook_name: str, worksheet_name: Optional[str] = None):
         """
-        Delete a workbook.
-        """
-
-        wb = self.gsheets_client.open(workbook_name)
-        self.gsheets_client.del_spreadsheet(file_id=wb.id)
-        logging.info(f'Deleted "{workbook_name}" workbook.')
-
-    def delete_worksheet(self, workbook_name: str, worksheet_name: str):
-        """
-        Delete a worksheet from a workbook.
+        Delete a worksheet or a workbook
         """
 
         wb = self.gsheets_client.open(workbook_name)
-        wb.del_worksheet(wb.worksheet(worksheet_name))
+        if worksheet_name:
+            wb.del_worksheet(wb.worksheet(worksheet_name))
+        else:
+            self.gsheets_client.del_spreadsheet(file_id=wb.id)
 
     def check_existence(
         self,
@@ -138,7 +130,7 @@ class GoogleSheetsWriter:
                 workbook_name=workbook_name if worksheet_name else workbook_name + f'_{_max_objects}',
                 worksheet_name=worksheet_name + f'_{_max_objects}' if worksheet_name else None,
         ):
-            self.delete_worksheet(
+            self.delete_object(
                 workbook_name=workbook_name if worksheet_name else workbook_name + f'_{_max_objects}',
                 worksheet_name=worksheet_name + f'_{_max_objects}' if worksheet_name else None,
             )
@@ -146,7 +138,7 @@ class GoogleSheetsWriter:
 
     def write_to_gsheets(
         self,
-        data_lod: List[dict],
+        data_lod,
         workbook_name: str,
         chunk_size: Optional[int] = 100_000,
         max_cells_per_sheet: Optional[int] = 2_500_000,
@@ -177,10 +169,10 @@ class GoogleSheetsWriter:
         # Split data into multiple workbooks, if necessary
         for i in range(1, number_of_workbooks + 1):
 
-            logging.info(f'Starting write to "{_workbook_name}" workbook...')
-
             # Define dynamic workbook name
             _workbook_name = workbook_name + f'_{i}'
+
+            logging.info(f'Starting write to "{_workbook_name}" workbook...')
 
             # Create workbook if it doesn't exist
             if not self.check_existence(workbook_name=_workbook_name):
@@ -219,7 +211,7 @@ class GoogleSheetsWriter:
 
                     # Remove "Sheet1" sheet, if it exists
                     if self.check_existence(workbook_name=_workbook_name, worksheet_name="Sheet1"):
-                        self.delete_worksheet(workbook_name=_workbook_name, worksheet_name="Sheet1")
+                        self.delete_object(workbook_name=_workbook_name, worksheet_name="Sheet1")
 
                     # Write headers to worksheet
                     worksheet.update('A1', headers)
