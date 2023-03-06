@@ -55,7 +55,7 @@ jobs:
         uses: actions/upload-artifact@v3
         with:
           name: covdata
-          path: coverage
+          path: .tox/coverage/.coverage
           # if-no-files-found: ignore
 
   coverage:
