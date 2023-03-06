@@ -7,7 +7,7 @@ authors = ["gibz104"]
 
 # Python dependencies
 [tool.poetry.dependencies]
-python = "^3.9"
+python = "^3.8"
 
 coverage = "^7.2.1"
 gspread = "^5.6.0"
@@ -29,11 +29,12 @@ build-backend = "poetry.core.masonry.api"
 legacy_tox_ini = """
 [tox]
 skipsdist = true
-envlist = py37,py38,py39,py310
+envlist = py38,py39,py310
 
 [testenv]
-allowlist_externals = poetry
+allowlist_externals = poetry, pytest
+deps = poetry, pytest
 commands =
-    poetry install -v
-    poetry run pytest
+    poetry install
+    poetry run pytest --benchmark-skip
 """
