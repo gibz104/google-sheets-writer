@@ -55,8 +55,7 @@ jobs:
         uses: actions/upload-artifact@v3
         with:
           name: covdata
-          # path: .coverage.*
-          # if-no-files-found: ignore
+          path: coverage
 
   coverage:
     name: Coverage
@@ -79,6 +78,7 @@ jobs:
         uses: actions/download-artifact@v3
         with:
           name: covdata
+          path: coverage
 
       - name: "Combine tox and coverage data"
         run: |
