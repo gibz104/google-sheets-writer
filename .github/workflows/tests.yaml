@@ -71,6 +71,9 @@ jobs:
         with:
           python-version: "3.10"
 
+      - name: "Install Poetry"
+        uses: snok/install-poetry@v1
+
       - name: "Install dependencies"
         run: |
           python -m pip install tox tox-gh-actions
@@ -81,7 +84,7 @@ jobs:
         with:
           name: covdata
 
-      - name: "Combine tox and coverage data"
+      - name: "Combine coverage data"
         run: |
           python -m tox -e coverage
           export TOTAL=$(python -c "import json;print(json.load(open('coverage.json'))['totals']['percent_covered_display'])")
