@@ -33,7 +33,6 @@ envlist = py38,py39,py310
 
 [testenv]
 allowlist_externals = poetry, pytest
-deps = poetry, pytest
 commands =
     poetry install
     poetry run pytest --benchmark-skip
