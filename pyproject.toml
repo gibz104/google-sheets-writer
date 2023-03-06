@@ -38,8 +38,8 @@ commands =
 basepython = python3.10
 commands =
     python -m coverage combine
-    python -m coverage report -m --skip-covered
-    python -m coverage json
+    python -m coverage report -mi --skip-covered
+    python -m coverage json -i
 
 [gh-actions]
 python =
