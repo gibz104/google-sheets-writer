@@ -33,30 +33,30 @@ jobs:
 
     steps:
       - name: "Check out code"
-        uses: "actions/checkout@v3"
+        uses: actions/checkout@v3
 
       - name: "Set up Python env"
-        uses: "actions/setup-python@v3"
+        uses: actions/setup-python@v3
         with:
           python-version: "${{ matrix.python-version }}"
 
-      - name: Install Poetry
+      - name: "Install Poetry"
         uses: snok/install-poetry@v1
 
-      - name: "Install tox"
+      - name: "Install dependencies"
         run: |
-          python -m pip install tox tox-gh-actions poetry
+          python -m pip install tox tox-gh-actions
+          poetry install
 
       - name: "Run tox for ${{ matrix.python-version }}"
         run: |
-          tox
+          python -m tox
 
       - name: "Upload coverage data"
         uses: actions/upload-artifact@v3
         with:
           name: covdata
-          path: .tox/coverage/.coverage
-          # if-no-files-found: ignore
+          path: .coverage.*
 
   coverage:
     name: Coverage
@@ -64,16 +64,17 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - name: "Check out code"
-        uses: "actions/checkout@v3"
+        uses: actions/checkout@v3
 
       - name: "Set up Python env"
-        uses: "actions/setup-python@v3"
+        uses: actions/setup-python@v3
         with:
           python-version: "3.10"
 
-      - name: "Install tox"
+      - name: "Install dependencies"
         run: |
-          python -m pip install tox tox-gh-actions poetry
+          python -m pip install tox tox-gh-actions
+          poetry install
 
       - name: "Download coverage data"
         uses: actions/download-artifact@v3
