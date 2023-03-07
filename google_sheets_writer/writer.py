@@ -4,7 +4,7 @@ import numpy as np
 import gspread
 import logging
 
-from typing import Optional, List, Literal
+from typing import Optional, Literal
 from google_sheets_writer.utils.other_utils import chunk_list
 from functools import cached_property
 
@@ -22,7 +22,7 @@ class GoogleSheetsWriter:
     
     def __init__(
         self,
-        user_email: Optional[str] = 'gibz@libertas.systems',  # all new workbooks will be shared with this email
+        user_email: Optional[str] = None,  # all new workbooks will be shared with this email
         auth_type: Literal['oauth', 'service_account'] = 'oauth',  # authorization type
     ):
         self.user_email = user_email
@@ -141,8 +141,8 @@ class GoogleSheetsWriter:
         data_lod,
         workbook_name: str,
         chunk_size: Optional[int] = 100_000,
-        max_cells_per_sheet: Optional[int] = 2_500_000,
-        max_cells_per_workbook: Optional[int] = 10_000_000,
+        max_cells_per_sheet: Optional[int] = 3_000_000,
+        max_cells_per_workbook: Optional[int] = 9_000_000,
     ):
         """
         Write a list of dicts to Google Sheets.  The max number of cells per sheet and workbook
