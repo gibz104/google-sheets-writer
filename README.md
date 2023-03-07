@@ -50,8 +50,8 @@ writer.write_to_gsheets(
 ```
 #### Additional parameters can also be provided:
  *  `chunk_size`: # of records to write at a time to Google Sheets (Default = 100,000)<br>
- *  `max_cells_per_sheet`: max # of cells per worksheet (Default = 2,500,000)<br>
- *  `max_cells_per_workbook`: max # of cells per workbook (Default = 10,000,000)<br>
+ *  `max_cells_per_sheet`: max # of cells per worksheet (Default = 3,000,000)<br>
+ *  `max_cells_per_workbook`: max # of cells per workbook (Default = 9,000,000)<br>
 
 # Tests
 Basic unittests are in place in the `/tests` directory which can be run locally using `pytest`.  There is also a github workflow associated with this repo that will run the tests and report the code coverage on every push (https://github.com/gibz104/google-sheets-writer/actions/workflows/tests.yaml).
