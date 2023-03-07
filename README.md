@@ -12,8 +12,8 @@
 # Installation
 This google sheets writer uses the gspread package (https://github.com/burnash/gspread), which itself uses the official Google Sheets API.  There are two methods to authenticate with Google Sheets and need to be setup prior to using this google sheets writer.  For either method chosen, you will need to create a local json file with your authentication details.
 
-1) Service Account: authenticating on behalf of a bot (https://docs.gspread.org/en/latest/oauth2.html#for-bots-using-service-account)
-2) OAuth: authenticating on behalf of an end user (https://docs.gspread.org/en/latest/oauth2.html#for-end-users-using-oauth-client-id)
+1) **Service Account**: authenticating on behalf of a bot (https://docs.gspread.org/en/latest/oauth2.html#for-bots-using-service-account)
+2) **OAuth**: authenticating on behalf of an end user (https://docs.gspread.org/en/latest/oauth2.html#for-end-users-using-oauth-client-id)
 
 Once done with the authentication steps outlined above in the gspread documentation, you are all set to begin using the google sheets writer. 
 
