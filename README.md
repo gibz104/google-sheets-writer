@@ -5,7 +5,7 @@
 **Google Sheets has a limit of 10 million cells per workbook.**
 
 [![Test Suite](https://github.com/gibz104/google-sheets-writer/actions/workflows/tests.yaml/badge.svg)](https://github.com/gibz104/google-sheets-writer/actions/workflows/tests.yaml)
-[![Coverage](https://img.shields.io/endpoint?url=https://gist.githubusercontent.com/gibz104/465cb74d7d8ba19a655fba50d0ce3665/raw/covbadge.json)](https://github.com/gibz104/google-sheets-writer/actions/workflows/tests.yaml)
+[![Coverage](https://img.shields.io/endpoint?url=https://gist.githubusercontent.com/gibz104/465cb74d7d8ba19a655fba50d0ce3665/raw/covbadge-google-sheets-writer.json)](https://github.com/gibz104/google-sheets-writer/actions/workflows/tests.yaml)
 [![Py Versions](https://img.shields.io/badge/python-3.8_|_3.9_|_3.10-blue.svg)](https://www.python.org/downloads/)
 [![Test OS](https://img.shields.io/badge/tested_on-ubuntu_|_mac_os-blue.svg)](https://github.com/gibz104/google-sheets-writer/actions/workflows/tests.yaml)
 
